@@ -1,6 +1,6 @@
 package ProjectModulo2;
 
-public class PessoaJuridica extends ContaPoupanca {
+public abstract class PessoaJuridica {
     // -------------------------- ATRIBUTOS PJ -------------------------
     private String _cnpj;
     private String _razaoSocial;

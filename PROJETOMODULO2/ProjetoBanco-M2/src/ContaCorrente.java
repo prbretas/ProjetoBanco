@@ -2,12 +2,12 @@ package ProjectModulo2;
 
 import java.util.Date;
 
-public class ContaCorrente extends PessoaFisica{
+public class ContaCorrente extends PessoaFisica {
 
     private Date _dataAtual = new Date();
     private String _numConta;
-    private String _operacao = "001";
-    private String _agencia = "145";
+    final private String _operacao = "001";
+    final private String _agencia = "145";
     private double _saldo;
 
     //--------------------------- GET E SET ------------------------------------------------
@@ -77,36 +77,105 @@ public class ContaCorrente extends PessoaFisica{
 
     //------------------------------ METODOS ---------------------------------------
     // VOID
-    public void mostrarSaldoVoid() {
-        System.out.printf("%s - O saldo atual da conta Nº %s é: R$%.2f\n", getDataAtual(), get_numConta(), get_saldo());
+    public void consultarSaldoVoid() {
+        System.out.printf("%s - O saldo atual da conta Nº %s é: R$%.2f\n",
+                getDataAtual(), get_numConta(), get_saldo());
     }
 
-    public double mostrarSaldo() {
+    public double consultarSaldo() {
         return get_saldo();
     }
 
 
-    public double calcularCredito(double credito) {
-        set_saldo(credito + get_saldo());
-        return credito;
+    public double calcularCredito(double creditoValor) {
+        set_saldo(creditoValor + get_saldo());
+        return creditoValor;
     }
-    public void calcularCreditoVoid(double credito) {
-        set_saldo(credito + get_saldo());
-        System.out.printf("\nO crédito de R$%.2f foi realizado com sucesso.\n", credito);
-        mostrarSaldoVoid();
+
+    public void calcularCreditoVoid(double creditovalor) {
+        set_saldo(creditovalor + get_saldo());
+        System.out.printf("\nO crédito de R$%.2f foi realizado com sucesso.\n", creditovalor);
+        consultarSaldoVoid();
     }
-    public double calcularDebito(double debito) {
-        set_saldo(get_saldo() - debito);
-        return debito;
+
+    public double calcularDebito(double debitoValor) {
+        set_saldo(get_saldo() - debitoValor);
+        return debitoValor;
     }
+
     public void calcularDebitoVoid(double debito) {
-        if(get_saldo() < 0 || debito > get_saldo()){
+        if (get_saldo() < 0 || debito > get_saldo()) {
             System.out.println("Você não tem saldo suficiente");
         } else {
             set_saldo(get_saldo() - debito);
             System.out.printf("\nO débito de R$%.2f foi realizado com sucesso.\n", debito);
-            mostrarSaldoVoid();
+            consultarSaldoVoid();
         }
     }
+
+    public double calcularSaque(double saqueValor) {
+        set_saldo(get_saldo() - saqueValor);
+        return saqueValor;
+    }
+
+    public void calcularSaqueVoid(double saqueValor) {
+        if (get_saldo() < 0 || saqueValor > get_saldo()) {
+            System.out.println("Você não tem saldo suficiente");
+        } else {
+            set_saldo(get_saldo() - saqueValor);
+            System.out.printf("\nO débito de R$%.2f foi realizado com sucesso.\n", saqueValor);
+            consultarSaldoVoid();
+        }
+    }
+
+
+    //------------------------ TERMINAR AS FUNÇÕES --------------------------
+
+
+    public void abrirConta() {
+
+    }
+
+
+    public double depositar(double depositoValor) {
+        set_saldo(depositoValor + get_saldo());
+        return depositoValor;
+    }
+
+    public void depositarVoid(double depositoValor) {
+        set_saldo(depositoValor + get_saldo());
+        System.out.printf("\nO depósito de R$%.2f foi realizado com sucesso.\n", depositoValor);
+        consultarSaldoVoid();
+    }
+
+
+    public double transferirValor(double transferenciaValor) {
+        set_saldo(get_saldo() - transferenciaValor);
+        return transferenciaValor;
+    }
+
+    public void transferirValorVoid(double transferenciaValor) {
+        if (get_saldo() < 0 || transferenciaValor > get_saldo()) {
+            System.out.println("Você não tem saldo suficiente");
+        } else {
+            set_saldo(get_saldo() - transferenciaValor);
+            System.out.printf("\nA transferência de R$%.2f foi realizado com sucesso.\n", transferenciaValor);
+            consultarSaldoVoid();
+        }
+    }
+
+
+    public double investirValor(double investimentoValor) {
+        set_saldo(investimentoValor + get_saldo());
+        return investimentoValor;
+    }
+
+    public void investirValorVoid(double investimentoValor) {
+        set_saldo(investimentoValor + get_saldo());
+        System.out.printf("\nO investimento de R$%.2f foi realizado com sucesso.\n", investimentoValor);
+        consultarSaldoVoid();
+    }
+
+
 
 }
