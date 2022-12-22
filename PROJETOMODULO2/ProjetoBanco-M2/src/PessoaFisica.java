@@ -1,6 +1,6 @@
 package ProjectModulo2;
 
-public class PessoaFisica extends ContaBancaria {
+public abstract class PessoaFisica{
     // -------------------------- ATRIBUTOS PF -------------------------
     private String _nome;
     private String _sobrenome;
@@ -69,9 +69,8 @@ public class PessoaFisica extends ContaBancaria {
 
     // ------------------------- CONSTRUCTOR ---------------------------
 
-    public PessoaFisica(String numConta, double saldo, String nome, String sobrenome,
+    public PessoaFisica(String nome, String sobrenome,
                         String cpf, String documento, String dataDeNascimento, String endereco, String telefone) {
-        super(numConta, saldo);
         this._nome = nome;
         this._sobrenome = sobrenome;
         this._cpf = cpf;
@@ -80,7 +79,6 @@ public class PessoaFisica extends ContaBancaria {
         this._endereco = endereco;
         this._telefone = telefone;
     }
-
     public PessoaFisica() {
 
     }
@@ -96,11 +94,7 @@ public class PessoaFisica extends ContaBancaria {
                 "\ndataDeNascimento: " + get_dataDeNascimento() +
                 "\nendereco: " + get_endereco() +
                 "\ntelefone: " + get_telefone() +
-                "\nagencia: " + get_agencia() +
-                "\noperaçao: " + get_operacao() +
-                "\nnumConta: " + get_numConta() +
-                "\nsaldo: " + get_saldo() +
-                "\n}";
+                 "\n}";
     }
 
     // ----------------------- METODOS -----------------------------------------
