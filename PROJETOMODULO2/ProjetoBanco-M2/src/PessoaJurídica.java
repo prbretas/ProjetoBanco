@@ -1,3 +1,5 @@
+package ProjectModulo2;
+
 public class PessoaJurídica extends ContaBancaria {
     // -------------------------- ATRIBUTOS PJ -------------------------
     private String _cnpj;

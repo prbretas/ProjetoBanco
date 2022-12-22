@@ -1,3 +1,6 @@
+package ProjectModulo2;
+
+
 import java.util.Date;
 
 public abstract class ContaBancaria {
@@ -32,6 +35,14 @@ public abstract class ContaBancaria {
         return _agencia;
     }
 
+    public Date getDataAtual() {
+        return _dataAtual;
+    }
+
+    public void setDataAtual(Date dataAtual) {
+        this._dataAtual = dataAtual;
+    }
+
     //--------------------------- CONSTRUCTOR ------------------------------------------------
     public ContaBancaria(String numConta, double saldo) {
         this._numConta = numConta;
@@ -63,35 +74,29 @@ public abstract class ContaBancaria {
         return get_saldo();
     }
 
-    public Date getDataAtual() {
-        return _dataAtual;
-    }
 
-    public void setDataAtual(Date dataAtual) {
-        this._dataAtual = dataAtual;
-    }
 
     public double calcularCredito(double credito) {
-        set_saldo(credito + _saldo);
+        set_saldo(credito + get_saldo());
         return credito;
     }
 
     public void calcularCreditoVoid(double credito) {
-        set_saldo(credito + _saldo);
+        set_saldo(credito + get_saldo());
         System.out.println("\nO crédito foi realizado com sucesso.");
         System.out.printf("O crédito foi de R$%.2f.\n", credito);
         mostrarSaldoVoid();
     }
 
     public double calcularDebito(double debito) {
-        set_saldo(debito - _saldo);
+        set_saldo(get_saldo()-debito);
         return debito;
     }
 
     public void calcularDebitoVoid(double debito) {
-        set_saldo(debito - _saldo);
+        set_saldo(get_saldo()-debito);
         System.out.println("\nO débito foi realizado com sucesso.");
-        System.out.printf("O débito foi de %.2f.", debito);
+        System.out.printf("O débito foi de R$%.2f.\n", debito);
         mostrarSaldoVoid();
 
     }

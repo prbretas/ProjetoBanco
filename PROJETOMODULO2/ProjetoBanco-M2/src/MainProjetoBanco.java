@@ -1,3 +1,5 @@
+package ProjectModulo2;
+
 /*
 #APP Banco
         Crie uma aplicação que simule uma app bancária.
@@ -32,8 +34,8 @@ public class MainProjetoBanco {
                 "21 3947-4597");
 
         clientePF2.imprimirDadosPFNaTela();
-        clientePF2.calcularCreditoVoid(1455.97);
-        clientePF2.calcularCreditoVoid(949.99);
+        clientePF2.calcularCreditoVoid(100);
+        clientePF2.calcularCreditoVoid(150);
 
         //EXEMPLO:
         // METODO DOUBLE RETORNANDO - DEMORA MUITO PARA ESCREVER.
@@ -42,8 +44,11 @@ public class MainProjetoBanco {
 
 
         clientePF2.imprimirDadosPFNaTela();
-        clientePF2.calcularDebitoVoid(12.50);
-        clientePF2.calcularDebitoVoid(22.51);
+        clientePF2.calcularDebitoVoid(30);
+        
+
+
+
 
 
     }

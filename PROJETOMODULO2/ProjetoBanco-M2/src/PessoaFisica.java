@@ -1,3 +1,5 @@
+package ProjectModulo2;
+
 public class PessoaFisica extends ContaBancaria {
     // -------------------------- ATRIBUTOS PF -------------------------
     private String _nome;
