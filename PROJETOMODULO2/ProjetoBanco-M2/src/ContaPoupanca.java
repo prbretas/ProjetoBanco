@@ -96,7 +96,9 @@ public class ContaPoupanca extends PessoaFisica {
     //------------------------------ METODOS ---------------------------------------
     // VOID
     public void consultarSaldoVoid() {
-        System.out.printf("%s - O saldo atual da conta Nº %s é: R$%.2f\n", getDataAtual(), get_numConta(), get_saldo());
+        System.out.printf("%s - O saldo atual da conta Nº %s é: R$%.2f\n" +
+                        "O saldo da sua conta investimento é R$%.2f\n",
+                getDataAtual(), get_numConta(), get_saldo(), get_contaInvestimento());
     }
 
     public double consultarSaldo() {
@@ -185,16 +187,17 @@ public class ContaPoupanca extends PessoaFisica {
 
     public double investirValor(double investimentoValor) {
         set_saldo(get_saldo() - investimentoValor);
-        set_contaInvestimento(investimentoValor);
+        set_contaInvestimento(get_contaInvestimento() + investimentoValor);
         return investimentoValor;
     }
 
     public void investirValorVoid(double investimentoValor) {
         set_saldo(get_saldo() - investimentoValor);
-        set_contaInvestimento(investimentoValor);
+        set_contaInvestimento(get_contaInvestimento() + investimentoValor);
         System.out.printf("\nO investimento de R$%.2f foi realizado com sucesso.\n", investimentoValor);
         consultarSaldoVoid();
     }
+
 
     //-------------------------------- AJUSTAR ERROS ----------------------------------------------------
     public void mostrarOperacoes() {

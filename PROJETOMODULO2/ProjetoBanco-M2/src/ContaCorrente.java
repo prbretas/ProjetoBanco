@@ -101,8 +101,9 @@ public class ContaCorrente extends PessoaFisica {
     //------------------------------ METODOS ---------------------------------------
     // VOID
     public void consultarSaldoVoid() {
-        System.out.printf("%s - O saldo atual da conta Nº %s é: R$%.2f\n",
-                getDataAtual(), get_numConta(), get_saldo());
+        System.out.printf("%s - O saldo atual da conta Nº %s é: R$%.2f\n" +
+                        "O saldo da sua conta investimento é R$%.2f\n",
+                getDataAtual(), get_numConta(), get_saldo(), get_contaInvestimento());
     }
 
     public double consultarSaldo() {
@@ -137,8 +138,11 @@ public class ContaCorrente extends PessoaFisica {
     }
 
     public double calcularSaque(double saqueValor) {
-        set_saldo(get_saldo() - saqueValor);
-        return saqueValor;
+        if (get_saldo() < 0 || saqueValor > get_saldo()) {
+             } else {
+            set_saldo(get_saldo() - saqueValor);
+            consultarSaldoVoid();
+        }     return saqueValor;
     }
 
     public void calcularSaqueVoid(double saqueValor) {
@@ -146,7 +150,7 @@ public class ContaCorrente extends PessoaFisica {
             System.out.println("Você não tem saldo suficiente");
         } else {
             set_saldo(get_saldo() - saqueValor);
-            System.out.printf("\nO débito de R$%.2f foi realizado com sucesso.\n", saqueValor);
+            System.out.printf("\nO saque de R$%.2f foi realizado com sucesso.\n", saqueValor);
             consultarSaldoVoid();
         }
     }
@@ -157,25 +161,21 @@ public class ContaCorrente extends PessoaFisica {
     public void abrirContaCorrente() {
 
     }
-
-
     public double depositar(double depositoValor) {
         set_saldo(depositoValor + get_saldo());
         return depositoValor;
     }
-
     public void depositarVoid(double depositoValor) {
         set_saldo(depositoValor + get_saldo());
         System.out.printf("\nO depósito de R$%.2f foi realizado com sucesso.\n", depositoValor);
         consultarSaldoVoid();
     }
 
-
     public double transferirValor(double transferenciaValor) {
-        set_saldo(get_saldo() - transferenciaValor);
+
+            set_saldo(get_saldo() - transferenciaValor);
         return transferenciaValor;
     }
-
     public void transferirValorVoid(double transferenciaValor) {
         if (get_saldo() < 0 || transferenciaValor > get_saldo()) {
             System.out.println("Você não tem saldo suficiente");
@@ -186,19 +186,22 @@ public class ContaCorrente extends PessoaFisica {
         }
     }
 
-
     public double investirValor(double investimentoValor) {
         set_saldo(get_saldo() - investimentoValor);
-        set_contaInvestimento(investimentoValor);
+        set_contaInvestimento(get_contaInvestimento() + investimentoValor);
         return investimentoValor;
     }
 
     public void investirValorVoid(double investimentoValor) {
-        set_saldo(get_saldo() - investimentoValor);
-        set_contaInvestimento(investimentoValor);
-        System.out.printf("\nO investimento de R$%.2f foi realizado com sucesso.\n", investimentoValor);
-        consultarSaldoVoid();
-    }
+        if (get_saldo() < 0 || investimentoValor > get_saldo()) {
+            System.out.println("Você não tem saldo suficiente");
+        } else {
+            set_saldo(get_saldo() - investimentoValor);
+            set_contaInvestimento(get_contaInvestimento() + investimentoValor);
+            System.out.printf("\nA transferência de R$%.2f foi realizado com sucesso.\n", investimentoValor);
+            consultarSaldoVoid();
+        }
+         }
 
     //-------------------------------- AJUSTAR ERROS ----------------------------------------------------
     public void mostrarOperacoes() {
@@ -250,7 +253,7 @@ public class ContaCorrente extends PessoaFisica {
                         System.out.println("Digite abaixo o valor que deseja Transferir:");
                         double valor = input.nextDouble();
 
-                        System.out.printf("\nVocê transferiu R$%.2f para a conta de numero: AG %s OP %s CONTA %s", valor, agTrasf, opTransf, contaTransf);
+                        System.out.printf("\nVocê tentou transferir R$%.2f para a conta de numero: AG %s OP %s CONTA %s.\n", valor, agTrasf, opTransf, contaTransf);
                         transferirValorVoid(valor);
                         continuarPrograma();
 
