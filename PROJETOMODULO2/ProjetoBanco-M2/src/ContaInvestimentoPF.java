@@ -1,14 +1,26 @@
-package ProjectModulo2;
+package Projeto2Scanner.ProjectModulo2;
 
 import java.util.Date;
+import java.util.Random;
+import java.util.Scanner;
 
-public class ContaInvestimentoPF extends PessoaFisica{
+public class ContaInvestimentoPF extends PessoaFisica {
+    Scanner input = new Scanner(System.in);
+
+    Random randomId = new Random();
+
+    // GERAR NUMERO ALEATORIO PARA A CONTA
+    int numeroContaAleatorio = randomId.nextInt(999999999);
+    private int idConta = randomId.nextInt(10);
+    private String _numConta = String.valueOf(numeroContaAleatorio) + "-" + idConta;
 
     private Date _dataAtual = new Date();
-    private String _numConta;
-    private String _operacao = "230";
-    private String _agencia = "145";
+
+    final private String _operacao = "230";
+    final private String _agencia = "145";
     private double _saldo;
+
+    private double _contaInvestimento;
 
 
     //--------------------------- GET E SET ------------------------------------------------
@@ -44,12 +56,19 @@ public class ContaInvestimentoPF extends PessoaFisica{
         this._dataAtual = dataAtual;
     }
 
+    public double get_contaInvestimento() {
+        return _contaInvestimento;
+    }
+
+    public void set_contaInvestimento(double contaInvestimento) {
+        this._contaInvestimento = contaInvestimento;
+    }
+
     //--------------------------- CONSTRUCTOR ------------------------------------------------
     public ContaInvestimentoPF(String nome, String sobrenome, String cpf, String documento, String dataDeNascimento,
-                               String endereco, String telefone, String numConta,
-                               double saldo) {
+                               String endereco, String telefone, double saldo) {
         super(nome, sobrenome, cpf, documento, dataDeNascimento, endereco, telefone);
-        this._numConta = numConta;
+
         this._saldo = saldo;
     }
 
@@ -74,6 +93,7 @@ public class ContaInvestimentoPF extends PessoaFisica{
                 "\noperaçao: " + get_operacao() +
                 "\nnumConta: " + get_numConta() +
                 "\nsaldo: " + get_saldo() +
+                "\ncontaInvestimento: " + get_contaInvestimento() +
                 "\n}";
     }
 
@@ -92,17 +112,20 @@ public class ContaInvestimentoPF extends PessoaFisica{
         set_saldo(creditoValor + get_saldo());
         return creditoValor;
     }
+
     public void calcularCreditoVoid(double creditoValor) {
         set_saldo(creditoValor + get_saldo());
         System.out.printf("\nO crédito de R$%.2f foi realizado com sucesso.\n", creditoValor);
         consultarSaldoVoid();
     }
+
     public double calcularDebito(double debitoValor) {
         set_saldo(get_saldo() - debitoValor);
         return debitoValor;
     }
+
     public void calcularDebitoVoid(double debitoValor) {
-        if(get_saldo() < 0 || debitoValor > get_saldo()){
+        if (get_saldo() < 0 || debitoValor > get_saldo()) {
             System.out.println("Você não tem saldo suficiente");
         } else {
             set_saldo(get_saldo() - debitoValor);
@@ -112,13 +135,13 @@ public class ContaInvestimentoPF extends PessoaFisica{
     }
 
 
-    public double calcularSaque(double saqueValor){
+    public double calcularSaque(double saqueValor) {
         set_saldo(get_saldo() - saqueValor);
         return saqueValor;
     }
 
-    public void calcularSaqueVoid(double saqueValor){
-        if(get_saldo() < 0 || saqueValor > get_saldo()){
+    public void calcularSaqueVoid(double saqueValor) {
+        if (get_saldo() < 0 || saqueValor > get_saldo()) {
             System.out.println("Você não tem saldo suficiente");
         } else {
             set_saldo(get_saldo() - saqueValor);
@@ -130,7 +153,7 @@ public class ContaInvestimentoPF extends PessoaFisica{
 
 //------------------------ TERMINAR AS FUNÇÕES --------------------------
 
-    public void abrirConta() {
+    public void abrirContaInvestimentoPF() {
 
     }
 
@@ -162,14 +185,117 @@ public class ContaInvestimentoPF extends PessoaFisica{
     }
 
     public double investirValor(double investimentoValor) {
-        set_saldo(investimentoValor + get_saldo());
+        set_saldo(get_saldo() - investimentoValor);
+        set_contaInvestimento(investimentoValor);
         return investimentoValor;
     }
 
     public void investirValorVoid(double investimentoValor) {
-        set_saldo(investimentoValor + get_saldo());
+        set_saldo(get_saldo() - investimentoValor);
+        set_contaInvestimento(investimentoValor);
         System.out.printf("\nO investimento de R$%.2f foi realizado com sucesso.\n", investimentoValor);
         consultarSaldoVoid();
+    }
+
+    //-------------------------------- AJUSTAR ERROS ----------------------------------------------------
+    public void mostrarOperacoes() {
+        //------------------------------- OPERAÇÕES CONTA ----------------------------------
+        System.out.println("Qual operação você deseja fazer?");
+        System.out.println("------------------------------------------------");
+        System.out.println("|             1 - Saque                        |");
+        System.out.println("|             2 - Deposito                     |");
+        System.out.println("|             3 - Transferência                |");
+        System.out.println("|             4 - Investimento                 |");
+        System.out.println("|             5 - Ver Saldo                    |");
+        System.out.println("------------------------------------------------");
+        System.out.println("Selecione uma das opções acima");
+        realizarOperacao();
+    }
+
+    public void realizarOperacao() {
+        int operacao = input.nextInt();
+
+        switch (operacao) {
+            case 1 -> {
+                System.out.println("Você selecionou Saque");
+                System.out.println("Digite abaixo o valor que deseja Sacar:");
+                double valor = input.nextDouble();
+                calcularSaqueVoid(valor);
+                continuarPrograma();
+                break;
+            }
+            case 2 -> {
+                System.out.println("Você selecionou Depósito");
+                System.out.println("Digite abaixo o valor que deseja Depositar:");
+                double valor = input.nextDouble();
+                depositarVoid(valor);
+                continuarPrograma();
+                break;
+            }
+            case 3 -> {
+                System.out.println("Você selecionou Transferência");
+
+                System.out.println("Digite abaixo a AGÊNCIA DA CONTA que deseja transferir:");
+                int agTrasf = input.nextInt();
+                System.out.println("Digite abaixo a OPERAÇÃO DA CONTA que deseja transferir:");
+                int opTransf = input.nextInt();
+                System.out.println("Digite abaixo o NÚMERO DA CONTA que deseja transferir:");
+                int contaTransf = input.nextInt();
+
+                System.out.println("Digite abaixo o valor que deseja Transferir:");
+                double valor = input.nextDouble();
+
+                System.out.printf("\nVocê transferiu R$%.2f para a conta de numero: AG %s OP %s CONTA %s", valor, agTrasf, opTransf,contaTransf);
+                transferirValorVoid(valor);
+
+                continuarPrograma();
+                break;
+            }
+            case 4 -> {
+                System.out.println("Você selecionou Investimento");
+                System.out.println("Digite abaixo o valor que deseja Investir:");
+                double valor = input.nextDouble();
+                investirValorVoid(valor);
+                continuarPrograma();
+                break;
+            }
+            case 5 -> {
+                consultarSaldoVoid();
+                continuarPrograma();
+                break;
+            }
+            default -> {
+                System.out.println("Digite uma opção válida");
+                continuarPrograma();
+            }
+        }
+
+    }
+
+    public void continuarPrograma() {
+        boolean sair = false;
+        do {
+            System.out.println("-------------------------------------------");
+            System.out.println("|   Deseja realizar mais alguma operação? |");
+            System.out.println("|             1 - Sim                     |");
+            System.out.println("|             2 - Não                     |");
+            System.out.println("-------------------------------------------");
+
+            try {
+                int continuarOp = input.nextInt();
+
+                if (continuarOp == 1) {
+                    sair = false;
+                    mostrarOperacoes();
+                } else if (continuarOp == 2) {
+                    sair = true;
+                }
+            } catch (Exception e) {
+                System.out.println("Digite 1 para SIM ou 2 para NÃO");
+            }
+        } while (!sair);
+
+
     }
 
 }

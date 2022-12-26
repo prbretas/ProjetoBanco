@@ -1,4 +1,4 @@
-package ProjectModulo2;
+package Projeto2Scanner.ProjectModulo2;
 
 public abstract class PessoaJuridica {
     // -------------------------- ATRIBUTOS PJ -------------------------
