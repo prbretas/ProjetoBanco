@@ -14,9 +14,9 @@ public class ContaCorrente extends PessoaFisica {
     //-------------------------- ATRIBUTOS ----------------------------------------------------
 
     // GERAR NUMERO ALEATORIO PARA A CONTA
-    int numeroContaAleatorio = randomId.nextInt(999999999);
-    private int idConta = randomId.nextInt(10);
-    private String _numConta = String.valueOf(numeroContaAleatorio) + "-" + idConta;
+    int numeroContaAleatorio = randomId.nextInt(999999999); // NUMERO DA CONTA CORRENTE
+    private int digitoConta = randomId.nextInt(10); // DIGITO DA CONTA CORRENTE
+    private String _numConta = String.valueOf(numeroContaAleatorio) + "-" + digitoConta;
 
     //------------------------- OUTROS ATRIBUTOS ------------------------------------------
     private Date _dataAtual = new Date();
@@ -102,7 +102,7 @@ public class ContaCorrente extends PessoaFisica {
 
     public void consultarSaldoVoid() {
         System.out.printf("%s - O saldo atual da conta Nº %s é: R$%.2f\n" +
-                        "O saldo da sua conta investimento é R$%.2f\n",
+                        "                             - O saldo da sua conta investimento é: R$%.2f\n",
                 getDataAtual(), get_numConta(), get_saldo(), get_contaInvestimento());
     }
 
@@ -111,19 +111,19 @@ public class ContaCorrente extends PessoaFisica {
     }
 
 
-    // ------------------------ FUNÇÃO CARTAO DE CREDITO ----------------------------
+    // ------------ FUNÇÃO CARTAO DE CREDITO ---------------
     public double calcularCredito(double creditoValor) {
-        set_saldo(get_saldo() - creditoValor -(creditoValor * 0.0399));
+        set_saldo(get_saldo() - creditoValor - (creditoValor * 0.0399));
         return creditoValor;
     }
 
     public void calcularCreditoVoid(double creditovalor) {
-        set_saldo(get_saldo() - creditovalor - (creditovalor * 0.0399) );
+        set_saldo(get_saldo() - creditovalor - (creditovalor * 0.0399));
         System.out.printf("\nO crédito de R$%.2f foi realizado com sucesso.\n", creditovalor);
         consultarSaldoVoid();
     }
 
-// ------------------------ FUNÇÃO CARTAO DE DEBITO ----------------------------
+    // ----------- FUNÇÃO CARTAO DE DEBITO -------------
 
     public double calcularDebito(double debitoValor) {
         set_saldo(get_saldo() - debitoValor);
@@ -142,10 +142,11 @@ public class ContaCorrente extends PessoaFisica {
 
     public double calcularSaque(double saqueValor) {
         if (get_saldo() < 0 || saqueValor > get_saldo()) {
-             } else {
+        } else {
             set_saldo(get_saldo() - saqueValor);
             consultarSaldoVoid();
-        }     return saqueValor;
+        }
+        return saqueValor;
     }
 
     public void calcularSaqueVoid(double saqueValor) {
@@ -158,16 +159,16 @@ public class ContaCorrente extends PessoaFisica {
         }
     }
 
-
-    //------------------------ TERMINAR AS FUNÇÕES --------------------------
-
+    //------------ TERMINAR AS FUNÇÕES ------------
     public void abrirContaCorrente() {
 
     }
+
     public double depositar(double depositoValor) {
         set_saldo(depositoValor + get_saldo());
         return depositoValor;
     }
+
     public void depositarVoid(double depositoValor) {
         set_saldo(depositoValor + get_saldo());
         System.out.printf("\nO depósito de R$%.2f foi realizado com sucesso.\n", depositoValor);
@@ -176,9 +177,10 @@ public class ContaCorrente extends PessoaFisica {
 
     public double transferirValor(double transferenciaValor) {
 
-            set_saldo(get_saldo() - transferenciaValor);
+        set_saldo(get_saldo() - transferenciaValor);
         return transferenciaValor;
     }
+
     public void transferirValorVoid(double transferenciaValor) {
         if (get_saldo() < 0 || transferenciaValor > get_saldo()) {
             System.out.println("Você não tem saldo suficiente");
@@ -204,9 +206,8 @@ public class ContaCorrente extends PessoaFisica {
             System.out.printf("\nA transferência de R$%.2f foi realizado com sucesso.\n", investimentoValor);
             consultarSaldoVoid();
         }
-         }
+    }
 
-    //-------------------------------- AJUSTAR ERROS ----------------------------------------------------
     public void mostrarOperacoes() {
         //------------------------------- OPERAÇÕES CONTA ----------------------------------
         System.out.println("------------------------------------------------");
@@ -223,6 +224,7 @@ public class ContaCorrente extends PessoaFisica {
         System.out.println("Selecione uma das opções acima");
         realizarOperacao();
     }
+
     public void realizarOperacao() {
         int operacao = input.nextInt();
 
@@ -274,7 +276,7 @@ public class ContaCorrente extends PessoaFisica {
                         consultarSaldoVoid();
                         continuarPrograma();
                     }
-                    case 6->{
+                    case 6 -> {
                         sair = true;
                     }
                     default -> {
@@ -294,7 +296,6 @@ public class ContaCorrente extends PessoaFisica {
     }
 
     public void continuarPrograma() {
-        sair = false;
         do {
             System.out.println("-------------------------------------------");
             System.out.println("|   Deseja realizar mais alguma operação? |");

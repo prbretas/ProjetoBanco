@@ -25,12 +25,12 @@ public class MainBanco {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         Random randomId = new Random();
-        System.out.println("***************Olá seja Bem Vindo ao Banco LET's CODE ***************");
+        System.out.println();
+        System.out.println("***** Olá seja Bem Vindo ao Banco LET's CODE *****");
         boolean sair;
         do {
             sair = false;
             try {
-
                 System.out.println("--------------------------------------------------");
                 System.out.println("|Qual o tipo de conta que você gostaria de abrir?|");
                 System.out.println("--------------------------------------------------");

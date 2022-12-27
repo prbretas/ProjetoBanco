@@ -85,7 +85,9 @@ public class ContaInvestimentoPJ extends PessoaJuridica {
     //------------------------------ METODOS ---------------------------------------
     // VOID
     public void consultarSaldoVoid() {
-        System.out.printf("%s - O saldo atual da conta Nº %s é: R$%.2f\n" + "O saldo da sua conta investimento é R$%.2f\n", getDataAtual(), get_numConta(), get_saldo(), get_contaInvestimento());
+        System.out.printf("%s - O saldo atual da conta Nº %s é: R$%.2f\n" +
+                        "                             - O saldo da sua conta investimento é: R$%.2f\n",
+                getDataAtual(), get_numConta(), get_saldo(), get_contaInvestimento());
     }
 
     public double consultarSaldo() {

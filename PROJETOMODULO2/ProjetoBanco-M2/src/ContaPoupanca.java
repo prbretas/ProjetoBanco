@@ -95,10 +95,9 @@ public class ContaPoupanca extends PessoaFisica {
     }
 
     //------------------------------ METODOS ---------------------------------------
-    // VOID
     public void consultarSaldoVoid() {
         System.out.printf("%s - O saldo atual da conta Nº %s é: R$%.2f\n" +
-                        "O saldo da sua conta investimento é R$%.2f\n",
+                        "                             - O saldo da sua conta investimento é: R$%.2f\n",
                 getDataAtual(), get_numConta(), get_saldo(), get_contaInvestimento());
     }
 
