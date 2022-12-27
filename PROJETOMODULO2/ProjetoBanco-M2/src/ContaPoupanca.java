@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class ContaPoupanca extends PessoaFisica {
     Scanner input = new Scanner(System.in);
     Random randomId = new Random();
+    boolean sair;
 
     // GERAR NUMERO ALEATORIO PARA A CONTA
     int numeroContaAleatorio = randomId.nextInt(999999999);
@@ -217,88 +218,95 @@ public class ContaPoupanca extends PessoaFisica {
     public void realizarOperacao() {
         int operacao = input.nextInt();
 
-        switch (operacao) {
-            case 1 -> {
-                System.out.println("Você selecionou Saque");
-                System.out.println("Digite abaixo o valor que deseja Sacar:");
-                double valor = input.nextDouble();
-                calcularSaqueVoid(valor);
-                continuarPrograma();
-                break;
-            }
-            case 2 -> {
-                System.out.println("Você selecionou Depósito");
-                System.out.println("Digite abaixo o valor que deseja Depositar:");
-                double valor = input.nextDouble();
-                depositarVoid(valor);
-                continuarPrograma();
-                break;
-            }
-            case 3 -> {
-                System.out.println("Você selecionou Transferência");
+        do{
+            sair = false;
+            try{
+                switch (operacao) {
+                    case 1 -> {
+                        System.out.println("Você selecionou Saque");
+                        System.out.println("Digite abaixo o valor que deseja Sacar:");
+                        double valor = input.nextDouble();
+                        calcularSaqueVoid(valor);
+                        continuarPrograma();
 
-                System.out.println("Digite abaixo a AGÊNCIA DA CONTA que deseja transferir:");
-                int agTrasf = input.nextInt();
-                System.out.println("Digite abaixo a OPERAÇÃO DA CONTA que deseja transferir:");
-                int opTransf = input.nextInt();
-                System.out.println("Digite abaixo o NÚMERO DA CONTA que deseja transferir:");
-                int contaTransf = input.nextInt();
+                    }
+                    case 2 -> {
+                        System.out.println("Você selecionou Depósito");
+                        System.out.println("Digite abaixo o valor que deseja Depositar:");
+                        double valor = input.nextDouble();
+                        depositarVoid(valor);
+                        continuarPrograma();
 
-                System.out.println("Digite abaixo o valor que deseja Transferir:");
-                double valor = input.nextDouble();
+                    }
+                    case 3 -> {
+                        System.out.println("Você selecionou Transferência");
+                        System.out.println("Digite abaixo a AGÊNCIA DA CONTA que deseja transferir:");
+                        int agTrasf = input.nextInt();
+                        System.out.println("Digite abaixo a OPERAÇÃO DA CONTA que deseja transferir:");
+                        int opTransf = input.nextInt();
+                        System.out.println("Digite abaixo o NÚMERO DA CONTA que deseja transferir:");
+                        int contaTransf = input.nextInt();
 
-                System.out.printf("\nVocê transferiu R$%.2f para a conta de numero: AG %s OP %s CONTA %s", valor, agTrasf, opTransf,contaTransf);
-                transferirValorVoid(valor);
+                        System.out.println("Digite abaixo o valor que deseja Transferir:");
+                        double valor = input.nextDouble();
 
-                continuarPrograma();
-                break;
+                        System.out.printf("\nVocê tentou transferir R$%.2f para a conta de numero: AG %s OP %s CONTA %s.\n", valor, agTrasf, opTransf, contaTransf);
+                        transferirValorVoid(valor);
+                        continuarPrograma();
+
+                    }
+                    case 4 -> {
+                        System.out.println("Você selecionou Investimento");
+                        System.out.println("Digite abaixo o valor que deseja Investir:");
+                        double valor = input.nextDouble();
+                        investirValorVoid(valor);
+                        continuarPrograma();
+                    }
+                    case 5 -> {
+                        consultarSaldoVoid();
+                        continuarPrograma();
+                    }
+                    default -> {
+                        System.out.println("Digite uma opção válida");
+                        mostrarOperacoes();
+                    }
+
+                }
+
+            }catch(Exception e){
+                System.out.println("ERRO - Selecione uma opção válida");
+                sair = true;
             }
-            case 4 -> {
-                System.out.println("Você selecionou Investimento");
-                System.out.println("Digite abaixo o valor que deseja Investir:");
-                double valor = input.nextDouble();
-                investirValorVoid(valor);
-                continuarPrograma();
-                break;
-            }
-            case 5 -> {
-                consultarSaldoVoid();
-                continuarPrograma();
-                break;
-            }
-            default -> {
-                System.out.println("Digite uma opção válida");
-                continuarPrograma();
-            }
-        }
+        } while(!sair);
+
+
 
     }
 
     public void continuarPrograma() {
-        boolean sair = false;
+        sair = false;
         do {
             System.out.println("-------------------------------------------");
             System.out.println("|   Deseja realizar mais alguma operação? |");
             System.out.println("|             1 - Sim                     |");
             System.out.println("|             2 - Não                     |");
             System.out.println("-------------------------------------------");
-
             try {
                 int continuarOp = input.nextInt();
-
                 if (continuarOp == 1) {
                     sair = false;
                     mostrarOperacoes();
                 } else if (continuarOp == 2) {
                     sair = true;
+                } else {
+                    System.out.println("Digite 1 para SIM ou 2 para NÃO");
                 }
             } catch (Exception e) {
-                System.out.println("Digite 1 para SIM ou 2 para NÃO");
+                System.out.println("ERRO: ESSA OPÇÃO NÃO EXISTE");
+                sair = true;
             }
         } while (!sair);
 
 
     }
-
-
 }

@@ -221,9 +221,9 @@ public class ContaCorrente extends PessoaFisica {
     public void realizarOperacao() {
         int operacao = input.nextInt();
 
-        do{
+        do {
             sair = false;
-            try{
+            try {
                 switch (operacao) {
                     case 1 -> {
                         System.out.println("Você selecionou Saque");
@@ -267,7 +267,7 @@ public class ContaCorrente extends PessoaFisica {
                     }
                     case 5 -> {
                         consultarSaldoVoid();
-              continuarPrograma();
+                        continuarPrograma();
                     }
                     default -> {
                         System.out.println("Digite uma opção válida");
@@ -276,12 +276,11 @@ public class ContaCorrente extends PessoaFisica {
 
                 }
 
-            }catch(Exception e){
+            } catch (Exception e) {
                 System.out.println("ERRO - Selecione uma opção válida");
                 sair = true;
             }
-        } while(!sair);
-
+        } while (!sair);
 
 
     }
@@ -306,7 +305,7 @@ public class ContaCorrente extends PessoaFisica {
                 }
             } catch (Exception e) {
                 System.out.println("ERRO: ESSA OPÇÃO NÃO EXISTE");
-               sair = true;
+                sair = true;
             }
         } while (!sair);
 
