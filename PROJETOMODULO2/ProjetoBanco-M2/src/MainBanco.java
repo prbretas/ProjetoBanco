@@ -25,21 +25,23 @@ public class MainBanco {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         Random randomId = new Random();
-        System.out.println("***************Olá seja Bem Vindo ao Banco PRB***************");
+        System.out.println("***************Olá seja Bem Vindo ao Banco LET's CODE ***************");
         boolean sair;
         do {
             sair = false;
             try {
-                System.out.println("Qual o tipo de conta que você gostaria de abrir?");
-                System.out.println("------------------------------------------------");
-                System.out.println("|         1 - Conta Corrente (CC)              |");
-                System.out.println("|         2 - Conta Poupança (CP)              |");
-                System.out.println("|         3 - Conta Investimento PF (CIPF)     |");
-                System.out.println("|         4 - Conta Empresarial (CE)           |");
-                System.out.println("|         5 - Conta Investimento PJ (CIPJ)     |");
-                System.out.println("|                                              |");
-                System.out.println("|         6 - SAIR                             |");
-                System.out.println("------------------------------------------------");
+
+                System.out.println("--------------------------------------------------");
+                System.out.println("|Qual o tipo de conta que você gostaria de abrir?|");
+                System.out.println("--------------------------------------------------");
+                System.out.println("|          1 - Conta Corrente (CC)               |");
+                System.out.println("|          2 - Conta Poupança (CP)               |");
+                System.out.println("|          3 - Conta Investimento PF (CIPF)      |");
+                System.out.println("|          4 - Conta Empresarial (CE)            |");
+                System.out.println("|          5 - Conta Investimento PJ (CIPJ)      |");
+                System.out.println("|                                                |");
+                System.out.println("|          6 - SAIR                              |");
+                System.out.println("--------------------------------------------------");
                 System.out.println("Selecione uma das opções acima");
                 int opcoesContas = input.nextInt();
                 switch (opcoesContas) {

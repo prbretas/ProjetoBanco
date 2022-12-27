@@ -94,13 +94,13 @@ public class ContaInvestimentoPJ extends PessoaJuridica {
 
 
     public double calcularCredito(double creditoValor) {
-        set_saldo(creditoValor + get_saldo() + (creditoValor * 0.02));
+        set_saldo(get_saldo() - creditoValor -(creditoValor * 0.0299));
         return creditoValor;
     }
 
-    public void calcularCreditoVoid(double creditoValor) {
-        set_saldo(creditoValor + get_saldo());
-        System.out.printf("\nO crédito de R$%.2f foi realizado com sucesso.\n", creditoValor);
+    public void calcularCreditoVoid(double creditovalor) {
+        set_saldo(get_saldo() - creditovalor - (creditovalor * 0.0299) );
+        System.out.printf("\nO crédito de R$%.2f foi realizado com sucesso.\n", creditovalor);
         consultarSaldoVoid();
     }
 
@@ -186,13 +186,16 @@ public class ContaInvestimentoPJ extends PessoaJuridica {
     //-------------------------------- AJUSTAR ERROS ----------------------------------------------------
     public void mostrarOperacoes() {
         //------------------------------- OPERAÇÕES CONTA ----------------------------------
-        System.out.println("Qual operação você deseja fazer?");
+        System.out.println("------------------------------------------------");
+        System.out.println("|       Qual operação você deseja fazer?       |");
         System.out.println("------------------------------------------------");
         System.out.println("|             1 - Saque                        |");
         System.out.println("|             2 - Deposito                     |");
         System.out.println("|             3 - Transferência                |");
         System.out.println("|             4 - Investimento                 |");
         System.out.println("|             5 - Ver Saldo                    |");
+        System.out.println("|                                              |");
+        System.out.println("|             6 - SAIR                         |");
         System.out.println("------------------------------------------------");
         System.out.println("Selecione uma das opções acima");
         realizarOperacao();
@@ -248,6 +251,9 @@ public class ContaInvestimentoPJ extends PessoaJuridica {
                     case 5 -> {
                         consultarSaldoVoid();
                         continuarPrograma();
+                    }
+                    case 6 ->{
+                        sair = true;
                     }
                     default -> {
                         System.out.println("Digite uma opção válida");
