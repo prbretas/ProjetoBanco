@@ -171,13 +171,13 @@ public class ContaInvestimentoPJ extends PessoaJuridica {
 
     public double investirValor(double investimentoValor) {
         set_saldo(get_saldo() - investimentoValor);
-        set_contaInvestimento(get_contaInvestimento() + investimentoValor);
+        set_contaInvestimento(get_contaInvestimento() + investimentoValor + (investimentoValor *0.02));
         return investimentoValor;
     }
 
     public void investirValorVoid(double investimentoValor) {
         set_saldo(get_saldo() - investimentoValor);
-        set_contaInvestimento(get_contaInvestimento() + investimentoValor);
+        set_contaInvestimento(get_contaInvestimento() + investimentoValor + (investimentoValor * 0.02));
         System.out.printf("\nO investimento de R$%.2f foi realizado com sucesso.\n", investimentoValor);
         consultarSaldoVoid();
     }

@@ -149,7 +149,7 @@ public class MainBanco {
                         String inputTelefoneCIPJ = input.next();
                         System.out.println("Digite o valor do depósito inicial:");
                         double inputSaldoCIPJ = input.nextDouble();
-                        ContaEmpresarial CIPJ = new ContaEmpresarial(inputCnpjCIPJ, inputRazaoSocialCIPJ, inputNomeFantasiaCIPJ,
+                        ContaInvestimentoPJ CIPJ = new ContaInvestimentoPJ(inputCnpjCIPJ, inputRazaoSocialCIPJ, inputNomeFantasiaCIPJ,
                                 inputDataAberturaCIPJ, inputEnderecoCIPJ, inputTelefoneCIPJ, inputSaldoCIPJ);
                         System.out.println(CIPJ.toString());
                         CIPJ.mostrarOperacoes();
