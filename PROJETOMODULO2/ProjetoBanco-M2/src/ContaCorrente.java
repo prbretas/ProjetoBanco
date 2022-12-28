@@ -14,7 +14,7 @@ public class ContaCorrente extends PessoaFisica {
     //-------------------------- ATRIBUTOS ----------------------------------------------------
 
     // GERAR NUMERO ALEATORIO PARA A CONTA
-    int numeroContaAleatorio = randomId.nextInt(999999999); // NUMERO DA CONTA CORRENTE
+    int numeroContaAleatorio = randomId.nextInt(999999); // NUMERO DA CONTA CORRENTE
     private int digitoConta = randomId.nextInt(10); // DIGITO DA CONTA CORRENTE
     private String _numConta = String.valueOf(numeroContaAleatorio) + "-" + digitoConta;
 
@@ -83,6 +83,9 @@ public class ContaCorrente extends PessoaFisica {
     @Override
     public String toString() {
         return "\nContaCorrente {" +
+                "\ngencia: " + get_agencia() +
+                "\noperaçao: " + get_operacao() +
+                "\nnumConta: " + get_numConta() +
                 "\nnome: " + get_nome() +
                 "\nsobrenome:" + get_sobrenome() +
                 "\ncpf: " + get_cpf() +
@@ -90,11 +93,8 @@ public class ContaCorrente extends PessoaFisica {
                 "\ndataDeNascimento: " + get_dataDeNascimento() +
                 "\nendereco: " + get_endereco() +
                 "\ntelefone: " + get_telefone() +
-                "\nagencia: " + get_agencia() +
-                "\noperaçao: " + get_operacao() +
-                "\nnumConta: " + get_numConta() +
-                "\nsaldo: " + get_saldo() +
-                "\ncontaInvestimento: " + get_contaInvestimento() +
+                "\nsaldo: R$" + get_saldo() +
+                "\ncontaInvestimento: R$" + get_contaInvestimento() +
                 "\n}";
     }
 
@@ -165,12 +165,12 @@ public class ContaCorrente extends PessoaFisica {
     }
 
     public double depositar(double depositoValor) {
-        set_saldo(depositoValor + get_saldo());
+        set_saldo(get_saldo() + depositoValor);
         return depositoValor;
     }
 
     public void depositarVoid(double depositoValor) {
-        set_saldo(depositoValor + get_saldo());
+        set_saldo(get_saldo() + depositoValor);
         System.out.printf("\nO depósito de R$%.2f foi realizado com sucesso.\n", depositoValor);
         consultarSaldoVoid();
     }
@@ -238,7 +238,6 @@ public class ContaCorrente extends PessoaFisica {
                         double valor = input.nextDouble();
                         calcularSaqueVoid(valor);
                         continuarPrograma();
-
                     }
                     case 2 -> {
                         System.out.println("Você selecionou Depósito");
@@ -246,24 +245,20 @@ public class ContaCorrente extends PessoaFisica {
                         double valor = input.nextDouble();
                         depositarVoid(valor);
                         continuarPrograma();
-
                     }
                     case 3 -> {
                         System.out.println("Você selecionou Transferência");
                         System.out.println("Digite abaixo a AGÊNCIA DA CONTA que deseja transferir:");
-                        int agTrasf = input.nextInt();
+                        String agTrasf = input.next();
                         System.out.println("Digite abaixo a OPERAÇÃO DA CONTA que deseja transferir:");
-                        int opTransf = input.nextInt();
+                        String opTransf = input.next();
                         System.out.println("Digite abaixo o NÚMERO DA CONTA que deseja transferir:");
-                        int contaTransf = input.nextInt();
-
+                        String contaTransf = input.next();
                         System.out.println("Digite abaixo o valor que deseja Transferir:");
                         double valor = input.nextDouble();
-
                         System.out.printf("\nVocê tentou transferir R$%.2f para a conta de numero: AG %s OP %s CONTA %s.\n", valor, agTrasf, opTransf, contaTransf);
                         transferirValorVoid(valor);
                         continuarPrograma();
-
                     }
                     case 4 -> {
                         System.out.println("Você selecionou Investimento");
@@ -283,16 +278,12 @@ public class ContaCorrente extends PessoaFisica {
                         System.out.println("Digite uma opção válida");
                         mostrarOperacoes();
                     }
-
                 }
-
             } catch (Exception e) {
                 System.out.println("ERRO - Selecione uma opção válida");
                 sair = true;
             }
         } while (!sair);
-
-
     }
 
     public void continuarPrograma() {
@@ -317,8 +308,6 @@ public class ContaCorrente extends PessoaFisica {
                 sair = true;
             }
         } while (!sair);
-
-
     }
 
 }

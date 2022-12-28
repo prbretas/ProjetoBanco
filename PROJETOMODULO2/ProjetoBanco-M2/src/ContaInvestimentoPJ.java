@@ -10,7 +10,7 @@ public class ContaInvestimentoPJ extends PessoaJuridica {
     boolean sair;
 
     // GERAR NUMERO ALEATORIO PARA A CONTA
-    int numeroContaAleatorio = randomId.nextInt(999999999);
+    int numeroContaAleatorio = randomId.nextInt(999999);
     private int idConta = randomId.nextInt(10);
     private String _numConta = String.valueOf(numeroContaAleatorio) + "-" + idConta;
 
@@ -229,11 +229,11 @@ public class ContaInvestimentoPJ extends PessoaJuridica {
                     case 3 -> {
                         System.out.println("Você selecionou Transferência");
                         System.out.println("Digite abaixo a AGÊNCIA DA CONTA que deseja transferir:");
-                        int agTrasf = input.nextInt();
+                        String agTrasf = input.next();
                         System.out.println("Digite abaixo a OPERAÇÃO DA CONTA que deseja transferir:");
-                        int opTransf = input.nextInt();
+                        String opTransf = input.next();
                         System.out.println("Digite abaixo o NÚMERO DA CONTA que deseja transferir:");
-                        int contaTransf = input.nextInt();
+                        String contaTransf = input.next();
 
                         System.out.println("Digite abaixo o valor que deseja Transferir:");
                         double valor = input.nextDouble();
