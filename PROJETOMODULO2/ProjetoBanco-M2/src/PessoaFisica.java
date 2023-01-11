@@ -1,6 +1,10 @@
 package Projeto2Scanner.ProjectModulo2;
 
+import java.util.Scanner;
+
 public abstract class PessoaFisica{
+    Scanner input = new Scanner(System.in);
+
     // -------------------------- ATRIBUTOS PF -------------------------
     private String _nome;
     private String _sobrenome;
@@ -102,5 +106,22 @@ public abstract class PessoaFisica{
         System.out.println(toString());
     }
 
+
+    public void perguntas(){
+        System.out.println("Digite seu Nome:");
+        _nome = input.next();
+        System.out.println("Digite seu Sobrenome:");
+        _sobrenome = input.next();
+        System.out.println("Digite seu CPF:");
+        _cpf = input.next();
+        System.out.println("Digite o Número do seu Documento:");
+        _documento = input.next();
+        System.out.println("Digite sua Data de Nascimento:");
+        _dataDeNascimento = input.next();
+        System.out.println("Digite seu Endereço:");
+        _endereco = input.next();
+        System.out.println("Digite seu Telefone:");
+        _telefone = input.next();
+    }
 
 }

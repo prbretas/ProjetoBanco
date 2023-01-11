@@ -313,4 +313,9 @@ public class ContaPoupanca extends PessoaFisica {
 
 
     }
+
+    public void perguntaSaldoInicial() {
+        System.out.println("Digite o valor do depósito inicial:");
+        _saldo = input.nextDouble();
+    }
 }

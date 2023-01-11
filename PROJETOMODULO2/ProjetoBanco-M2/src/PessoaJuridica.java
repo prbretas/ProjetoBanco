@@ -1,6 +1,9 @@
 package Projeto2Scanner.ProjectModulo2;
 
+import java.util.Scanner;
+
 public abstract class PessoaJuridica {
+    Scanner input = new Scanner(System.in);
     // -------------------------- ATRIBUTOS PJ -------------------------
     private String _cnpj;
     private String _razaoSocial;
@@ -102,5 +105,21 @@ public abstract class PessoaJuridica {
         System.out.println(toString());
     }
 
+
+    public void perguntas(){
+        System.out.println("Digite o CNPJ da sua empresa:");
+        _cnpj = input.next();
+        System.out.println("Digite a Razão Social:");
+        _razaoSocial = input.next();
+        System.out.println("Digite o nome Fantasia:");
+        _nomeFantasia = input.next();
+        System.out.println("Digite a Data de Abertura da sua empresa:");
+        _dataDeAbertura = input.next();
+        System.out.println("Digite o Endereço da sua empresa:");
+        _endereco = input.next();
+        System.out.println("Digite o Telefone da sua empresa:");
+        _telefone = input.next();
+
+    }
 
 }
