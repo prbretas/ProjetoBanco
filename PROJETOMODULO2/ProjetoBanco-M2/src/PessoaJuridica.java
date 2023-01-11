@@ -119,7 +119,6 @@ public abstract class PessoaJuridica {
         _endereco = input.next();
         System.out.println("Digite o Telefone da sua empresa:");
         _telefone = input.next();
-
     }
 
 }

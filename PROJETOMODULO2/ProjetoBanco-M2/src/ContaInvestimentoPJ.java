@@ -19,7 +19,6 @@ public class ContaInvestimentoPJ extends PessoaJuridica {
     final private String _operacao = "230";
     final private String _agencia = "145";
     private double _saldo;
-    private double _contaInvestimento;
 
 
     //--------------------------- GET E SET ------------------------------------------------
@@ -55,14 +54,6 @@ public class ContaInvestimentoPJ extends PessoaJuridica {
         this._dataAtual = dataAtual;
     }
 
-    public double get_contaInvestimento() {
-        return _contaInvestimento;
-    }
-
-    public void set_contaInvestimento(double contaInvestimento) {
-        this._contaInvestimento = contaInvestimento;
-    }
-
 
     //--------------------------- CONSTRUCTOR ------------------------------------------------
     public ContaInvestimentoPJ(String cnpj, String razaoSocial, String nomeFantasia, String dataDeAbertura, String endereco, String telefone, double saldo) {
@@ -79,15 +70,25 @@ public class ContaInvestimentoPJ extends PessoaJuridica {
 
     @Override
     public String toString() {
-        return "\nContaInvestimentoPJ {" + "\ncnpj: " + get_cnpj() + "\nrazaoSocial: " + get_razaoSocial() + "\nnomeFantasia: " + get_nomeFantasia() + "\ndataDeAbertura: " + get_dataDeAbertura() + "\nendereco: " + get_endereco() + "\ntelefone: " + get_telefone() + "\nagencia: " + get_agencia() + "\noperaçao: " + get_operacao() + "\nnumConta: " + get_numConta() + "\nsaldo: " + get_saldo() + "\ncontaInvestimento: " + get_contaInvestimento() + "\n}";
+        return "\nContaInvestimentoPJ {" +
+                "\ncnpj: " + get_cnpj() +
+                "\nrazaoSocial: " + get_razaoSocial() +
+                "\nnomeFantasia: " + get_nomeFantasia() +
+                "\ndataDeAbertura: " + get_dataDeAbertura() +
+                "\nendereco: " + get_endereco() +
+                "\ntelefone: " + get_telefone() +
+                "\nagencia: " + get_agencia() +
+                "\noperaçao: " + get_operacao() +
+                "\nnumConta: " + get_numConta() +
+                "\nsaldo: " + get_saldo() +
+                "\n}";
     }
 
     //------------------------------ METODOS ---------------------------------------
     // VOID
     public void consultarSaldoVoid() {
-        System.out.printf("%s - O saldo atual da conta Nº %s é: R$%.2f\n" +
-                        "                             - O saldo da sua conta investimento é: R$%.2f\n",
-                getDataAtual(), get_numConta(), get_saldo(), get_contaInvestimento());
+        System.out.printf("%s - O saldo atual da conta Nº %s é: R$%.2f\n",
+                getDataAtual(), get_numConta(), get_saldo());
     }
 
     public double consultarSaldo() {
@@ -96,12 +97,12 @@ public class ContaInvestimentoPJ extends PessoaJuridica {
 
 
     public double calcularCredito(double creditoValor) {
-        set_saldo(get_saldo() - creditoValor -(creditoValor * 0.0299));
+        set_saldo(get_saldo() - creditoValor - (creditoValor * 0.0299));
         return creditoValor;
     }
 
     public void calcularCreditoVoid(double creditovalor) {
-        set_saldo(get_saldo() - creditovalor - (creditovalor * 0.0299) );
+        set_saldo(get_saldo() - creditovalor - (creditovalor * 0.0299));
         System.out.printf("\nO crédito de R$%.2f foi realizado com sucesso.\n", creditovalor);
         consultarSaldoVoid();
     }
@@ -171,20 +172,6 @@ public class ContaInvestimentoPJ extends PessoaJuridica {
     }
 
 
-    public double investirValor(double investimentoValor) {
-        set_saldo(get_saldo() - investimentoValor);
-        set_contaInvestimento(get_contaInvestimento() + investimentoValor + (investimentoValor *0.02));
-        return investimentoValor;
-    }
-
-    public void investirValorVoid(double investimentoValor) {
-        set_saldo(get_saldo() - investimentoValor);
-        set_contaInvestimento(get_contaInvestimento() + investimentoValor + (investimentoValor * 0.02));
-        System.out.printf("\nO investimento de R$%.2f foi realizado com sucesso.\n", investimentoValor);
-        consultarSaldoVoid();
-    }
-
-
     //-------------------------------- AJUSTAR ERROS ----------------------------------------------------
     public void mostrarOperacoes() {
         //------------------------------- OPERAÇÕES CONTA ----------------------------------
@@ -194,8 +181,7 @@ public class ContaInvestimentoPJ extends PessoaJuridica {
         System.out.println("|             1 - Saque                        |");
         System.out.println("|             2 - Deposito                     |");
         System.out.println("|             3 - Transferência                |");
-        System.out.println("|             4 - Investimento                 |");
-        System.out.println("|             5 - Ver Saldo                    |");
+        System.out.println("|             4 - Ver Saldo                    |");
         System.out.println("|                                              |");
         System.out.println("|             6 - SAIR                         |");
         System.out.println("------------------------------------------------");
@@ -244,17 +230,11 @@ public class ContaInvestimentoPJ extends PessoaJuridica {
 
                     }
                     case 4 -> {
-                        System.out.println("Você selecionou Investimento");
-                        System.out.println("Digite abaixo o valor que deseja Investir:");
-                        double valor = input.nextDouble();
-                        investirValorVoid(valor);
-                        continuarPrograma();
-                    }
-                    case 5 -> {
                         consultarSaldoVoid();
                         continuarPrograma();
                     }
-                    case 6 ->{
+
+                    case 6 -> {
                         sair = true;
                     }
                     default -> {

@@ -13,13 +13,10 @@ public class ContaInvestimentoPF extends PessoaFisica {
     int numeroContaAleatorio = randomId.nextInt(999999);
     private int idConta = randomId.nextInt(10);
     private String _numConta = String.valueOf(numeroContaAleatorio) + "-" + idConta;
-
     private Date _dataAtual = new Date();
-
     final private String _operacao = "230";
     final private String _agencia = "145";
     private double _saldo;
-    private double _contaInvestimento;
 
     //--------------------------- GET E SET ------------------------------------------------
     public String get_numConta() {
@@ -54,13 +51,6 @@ public class ContaInvestimentoPF extends PessoaFisica {
         this._dataAtual = dataAtual;
     }
 
-    public double get_contaInvestimento() {
-        return _contaInvestimento;
-    }
-
-    public void set_contaInvestimento(double contaInvestimento) {
-        this._contaInvestimento = contaInvestimento;
-    }
 
     //--------------------------- CONSTRUCTOR ------------------------------------------------
     public ContaInvestimentoPF(String nome, String sobrenome, String cpf, String documento, String dataDeNascimento,
@@ -89,16 +79,14 @@ public class ContaInvestimentoPF extends PessoaFisica {
                 "\noperaçao: " + get_operacao() +
                 "\nnumConta: " + get_numConta() +
                 "\nsaldo: " + get_saldo() +
-                "\ncontaInvestimento: " + get_contaInvestimento() +
                 "\n}";
     }
 
     //------------------------------ METODOS ---------------------------------------
     // VOID
     public void consultarSaldoVoid() {
-        System.out.printf("%s - O saldo atual da conta Nº %s é: R$%.2f\n" +
-                        "                             - O saldo da sua conta investimento é: R$%.2f\n",
-                getDataAtual(), get_numConta(), get_saldo(), get_contaInvestimento());
+        System.out.printf("%s - O saldo atual da conta Nº %s é: R$%.2f\n",
+                getDataAtual(), get_numConta(), get_saldo());
     }
 
     public double consultarSaldo() {
@@ -181,18 +169,6 @@ public class ContaInvestimentoPF extends PessoaFisica {
         }
     }
 
-    public double investirValor(double investimentoValor) {
-        set_saldo(get_saldo() - investimentoValor);
-        set_contaInvestimento(get_contaInvestimento() + investimentoValor);
-        return investimentoValor;
-    }
-
-    public void investirValorVoid(double investimentoValor) {
-        set_saldo(get_saldo() - investimentoValor);
-        set_contaInvestimento(get_contaInvestimento() + investimentoValor);
-        System.out.printf("\nO investimento de R$%.2f foi realizado com sucesso.\n", investimentoValor);
-        consultarSaldoVoid();
-    }
 
     //-------------------------------- AJUSTAR ERROS ----------------------------------------------------
     public void mostrarOperacoes() {
@@ -203,8 +179,7 @@ public class ContaInvestimentoPF extends PessoaFisica {
         System.out.println("|             1 - Saque                        |");
         System.out.println("|             2 - Deposito                     |");
         System.out.println("|             3 - Transferência                |");
-        System.out.println("|             4 - Investimento                 |");
-        System.out.println("|             5 - Ver Saldo                    |");
+        System.out.println("|             4 - Ver Saldo                    |");
         System.out.println("|                                              |");
         System.out.println("|             6 - SAIR                         |");
         System.out.println("------------------------------------------------");
@@ -253,18 +228,12 @@ public class ContaInvestimentoPF extends PessoaFisica {
 
                     }
                     case 4 -> {
-                        System.out.println("Você selecionou Investimento");
-                        System.out.println("Digite abaixo o valor que deseja Investir:");
-                        double valor = input.nextDouble();
-                        investirValorVoid(valor);
-                        continuarPrograma();
-                    }
-                    case 5 -> {
                         consultarSaldoVoid();
                         continuarPrograma();
                     }
-                    case 6 ->{
+                    case 6 -> {
                         sair = true;
+
                     }
                     default -> {
                         System.out.println("Digite uma opção válida");

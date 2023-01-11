@@ -19,7 +19,6 @@ public class ContaPoupanca extends PessoaFisica {
     final private String _operacao = "013";
     final private String _agencia = "145";
     private double _saldo;
-    private double _contaInvestimento;
 
     //--------------------------- GET E SET ------------------------------------------------
     public String get_numConta() {
@@ -54,14 +53,6 @@ public class ContaPoupanca extends PessoaFisica {
         this._dataAtual = dataAtual;
     }
 
-    public double get_contaInvestimento() {
-        return _contaInvestimento;
-    }
-
-    public void set_contaInvestimento(double contaInvestimento) {
-        this._contaInvestimento = contaInvestimento;
-    }
-
 
     //--------------------------- CONSTRUCTOR ------------------------------------------------
     public ContaPoupanca(String nome, String sobrenome, String cpf, String documento, String dataDeNascimento,
@@ -90,15 +81,13 @@ public class ContaPoupanca extends PessoaFisica {
                 "\noperaçao: " + get_operacao() +
                 "\nnumConta: " + get_numConta() +
                 "\nsaldo: " + get_saldo() +
-                "\ncontaInvestimento: " + get_contaInvestimento() +
                 "\n}";
     }
 
     //------------------------------ METODOS ---------------------------------------
     public void consultarSaldoVoid() {
-        System.out.printf("%s - O saldo atual da conta Nº %s é: R$%.2f\n" +
-                        "                             - O saldo da sua conta investimento é: R$%.2f\n",
-                getDataAtual(), get_numConta(), get_saldo(), get_contaInvestimento());
+        System.out.printf("%s - O saldo atual da conta Nº %s é: R$%.2f",
+                getDataAtual(), get_numConta(), get_saldo());
     }
 
     public double consultarSaldo() {
@@ -185,20 +174,6 @@ public class ContaPoupanca extends PessoaFisica {
     }
 
 
-    public double investirValor(double investimentoValor) {
-        set_saldo(get_saldo() - investimentoValor);
-        set_contaInvestimento(get_contaInvestimento() + investimentoValor);
-        return investimentoValor;
-    }
-
-    public void investirValorVoid(double investimentoValor) {
-        set_saldo(get_saldo() - investimentoValor);
-        set_contaInvestimento(get_contaInvestimento() + investimentoValor);
-        System.out.printf("\nO investimento de R$%.2f foi realizado com sucesso.\n", investimentoValor);
-        consultarSaldoVoid();
-    }
-
-
     //-------------------------------- AJUSTAR ERROS ----------------------------------------------------
     public void mostrarOperacoes() {
         //------------------------------- OPERAÇÕES CONTA ----------------------------------
@@ -208,8 +183,7 @@ public class ContaPoupanca extends PessoaFisica {
         System.out.println("|             1 - Saque                        |");
         System.out.println("|             2 - Deposito                     |");
         System.out.println("|             3 - Transferência                |");
-        System.out.println("|             4 - Investimento                 |");
-        System.out.println("|             5 - Ver Saldo                    |");
+        System.out.println("|             4 - Ver Saldo                    |");
         System.out.println("|                                              |");
         System.out.println("|             6 - SAIR                         |");
         System.out.println("------------------------------------------------");
@@ -257,16 +231,10 @@ public class ContaPoupanca extends PessoaFisica {
 
                     }
                     case 4 -> {
-                        System.out.println("Você selecionou Investimento");
-                        System.out.println("Digite abaixo o valor que deseja Investir:");
-                        double valor = input.nextDouble();
-                        investirValorVoid(valor);
-                        continuarPrograma();
-                    }
-                    case 5 -> {
                         consultarSaldoVoid();
                         continuarPrograma();
                     }
+
                     case 6 ->{
                         sair = true;
                     }
