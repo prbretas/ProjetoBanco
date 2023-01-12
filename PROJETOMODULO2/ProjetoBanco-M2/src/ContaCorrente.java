@@ -1,5 +1,7 @@
 package Projeto2Scanner.ProjectModulo2;
 
+import AulasClass.Encapsulamento.Conta;
+
 import java.util.Date;
 import java.util.Random;
 import java.util.Scanner;
@@ -39,8 +41,8 @@ public class ContaCorrente extends PessoaFisica {
         return _saldo;
     }
 
-    public void set_saldo(double _saldo) {
-        this._saldo = _saldo;
+    public void set_saldo(double saldo) {
+        this._saldo = saldo;
     }
 
     public String get_operacao() {
@@ -83,7 +85,7 @@ public class ContaCorrente extends PessoaFisica {
     @Override
     public String toString() {
         return "\nContaCorrente {" +
-                "\ngencia: " + get_agencia() +
+                "\nagencia: " + get_agencia() +
                 "\noperaçao: " + get_operacao() +
                 "\nnumConta: " + get_numConta() +
                 "\nnome: " + get_nome() +
@@ -161,8 +163,11 @@ public class ContaCorrente extends PessoaFisica {
 
     //------------ TERMINAR AS FUNÇÕES ------------
     public void abrirContaCorrente() {
-
+        perguntas();
+        System.out.println("Digite o valor do depósito inicial:");
+        _saldo = input.nextDouble();
     }
+
 
     public double depositar(double depositoValor) {
         set_saldo(get_saldo() + depositoValor);
@@ -308,12 +313,6 @@ public class ContaCorrente extends PessoaFisica {
                 sair = true;
             }
         } while (!sair);
-    }
-
-
-    public void perguntaSaldoInicial() {
-        System.out.println("Digite o valor do depósito inicial:");
-        _saldo = input.nextDouble();
     }
 
 

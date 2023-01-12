@@ -141,7 +141,9 @@ public class ContaInvestimentoPJ extends PessoaJuridica {
 
 
     public void abrirContaInvestimentoPJ() {
-
+        perguntas();
+        System.out.println("Digite o valor do depósito inicial:");
+        _saldo = input.nextDouble();
     }
 
     public double depositar(double depositoValor) {
@@ -276,14 +278,5 @@ public class ContaInvestimentoPJ extends PessoaJuridica {
                 sair = true;
             }
         } while (!sair);
-
-
     }
-
-    public void perguntaSaldoInicial() {
-        System.out.println("Digite o valor do depósito inicial:");
-        _saldo = input.nextDouble();
-    }
-
-
 }

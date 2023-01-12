@@ -2,7 +2,7 @@ package Projeto2Scanner.ProjectModulo2;
 
 import java.util.Scanner;
 
-public abstract class PessoaFisica{
+public abstract class PessoaFisica {
     Scanner input = new Scanner(System.in);
 
     // -------------------------- ATRIBUTOS PF -------------------------
@@ -83,6 +83,7 @@ public abstract class PessoaFisica{
         this._endereco = endereco;
         this._telefone = telefone;
     }
+
     public PessoaFisica() {
 
     }
@@ -98,7 +99,7 @@ public abstract class PessoaFisica{
                 "\ndataDeNascimento: " + get_dataDeNascimento() +
                 "\nendereco: " + get_endereco() +
                 "\ntelefone: " + get_telefone() +
-                 "\n}";
+                "\n}";
     }
 
     // ----------------------- METODOS -----------------------------------------
@@ -107,7 +108,7 @@ public abstract class PessoaFisica{
     }
 
 
-    public void perguntas(){
+    public void perguntas() {
         System.out.println("Digite seu Nome:");
         _nome = input.next();
         System.out.println("Digite seu Sobrenome:");

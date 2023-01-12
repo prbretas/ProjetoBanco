@@ -86,7 +86,7 @@ public class ContaPoupanca extends PessoaFisica {
 
     //------------------------------ METODOS ---------------------------------------
     public void consultarSaldoVoid() {
-        System.out.printf("%s - O saldo atual da conta Nº %s é: R$%.2f",
+        System.out.printf("%s - O saldo atual da conta Nº %s é: R$%.2f\n",
                 getDataAtual(), get_numConta(), get_saldo());
     }
 
@@ -96,12 +96,12 @@ public class ContaPoupanca extends PessoaFisica {
 
 
     public double calcularCredito(double creditoValor) {
-        set_saldo(get_saldo() - creditoValor -(creditoValor * 0.0199));
+        set_saldo(get_saldo() - creditoValor - (creditoValor * 0.0199));
         return creditoValor;
     }
 
     public void calcularCreditoVoid(double creditovalor) {
-        set_saldo(get_saldo() - creditovalor - (creditovalor * 0.0199) );
+        set_saldo(get_saldo() - creditovalor - (creditovalor * 0.0199));
         System.out.printf("\nO crédito de R$%.2f foi realizado com sucesso.\n", creditovalor);
         consultarSaldoVoid();
     }
@@ -142,7 +142,9 @@ public class ContaPoupanca extends PessoaFisica {
 
 
     public void abrirContaPoupanca() {
-
+        perguntas();
+        System.out.println("Digite o valor do depósito inicial:");
+        _saldo = input.nextDouble();
     }
 
 
@@ -194,9 +196,9 @@ public class ContaPoupanca extends PessoaFisica {
     public void realizarOperacao() {
         int operacao = input.nextInt();
 
-        do{
+        do {
             sair = false;
-            try{
+            try {
                 switch (operacao) {
                     case 1 -> {
                         System.out.println("Você selecionou Saque");
@@ -235,7 +237,7 @@ public class ContaPoupanca extends PessoaFisica {
                         continuarPrograma();
                     }
 
-                    case 6 ->{
+                    case 6 -> {
                         sair = true;
                     }
                     default -> {
@@ -245,12 +247,11 @@ public class ContaPoupanca extends PessoaFisica {
 
                 }
 
-            }catch(Exception e){
+            } catch (Exception e) {
                 System.out.println("ERRO - Selecione uma opção válida");
                 sair = true;
             }
-        } while(!sair);
-
+        } while (!sair);
 
 
     }
@@ -282,8 +283,5 @@ public class ContaPoupanca extends PessoaFisica {
 
     }
 
-    public void perguntaSaldoInicial() {
-        System.out.println("Digite o valor do depósito inicial:");
-        _saldo = input.nextDouble();
-    }
+
 }

@@ -106,7 +106,7 @@ public abstract class PessoaJuridica {
     }
 
 
-    public void perguntas(){
+    public void perguntas() {
         System.out.println("Digite o CNPJ da sua empresa:");
         _cnpj = input.next();
         System.out.println("Digite a Razão Social:");

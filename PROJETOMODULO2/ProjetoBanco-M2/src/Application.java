@@ -22,7 +22,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Application {
-    public static int MostrarTelaInicial(){
+    public static int MostrarTelaInicial() {
         Scanner input = new Scanner(System.in);
         System.out.println("--------------------------------------------------");
         System.out.println("|Qual o tipo de conta que você gostaria de abrir?|");
@@ -56,40 +56,35 @@ public class Application {
                     case 1:
                         System.out.println("-------- Você selecionou Conta Corrente --------");
                         ContaCorrente CC = new ContaCorrente();
-                        CC.perguntas();
-                        CC.perguntaSaldoInicial();
+                        CC.abrirContaCorrente();
                         CC.imprimirDadosPFNaTela();
                         CC.mostrarOperacoes();
                         break;
                     case 2:
                         System.out.println("--------- Você selecionou Conta Poupança -------");
                         ContaPoupanca CP = new ContaPoupanca();
-                        CP.perguntas();
-                        CP.perguntaSaldoInicial();
+                        CP.abrirContaPoupanca();
                         CP.imprimirDadosPFNaTela();
                         CP.mostrarOperacoes();
                         break;
                     case 3:
                         System.out.println("---- Você selecionou Conta Investimento PF -----");
                         ContaInvestimentoPF CIPF = new ContaInvestimentoPF();
-                        CIPF.perguntas();
-                        CIPF.perguntaSaldoInicial();
+                        CIPF.abrirContaInvestimentoPF();
                         CIPF.imprimirDadosPFNaTela();
                         CIPF.mostrarOperacoes();
                         break;
                     case 4:
                         System.out.println("------ Você selecionou Conta Empresarial -------");
                         ContaEmpresarial CE = new ContaEmpresarial();
-                        CE.perguntas();
-                        CE.perguntaSaldoInicial();
+                        CE.abrirContaEmpresarial();
                         CE.imprimirDadosPJNaTela();
                         CE.mostrarOperacoes();
                         break;
                     case 5:
                         System.out.println("----- Você selecionou Conta Investimento PJ ----");
                         ContaInvestimentoPJ CIPJ = new ContaInvestimentoPJ();
-                        CIPJ.perguntas();
-                        CIPJ.perguntaSaldoInicial();
+                        CIPJ.abrirContaInvestimentoPJ();
                         CIPJ.imprimirDadosPJNaTela();
                         CIPJ.mostrarOperacoes();
                         break;

@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.Random;
 import java.util.Scanner;
 
+//Conta Corrente Empresarial - Conta PJ
 public class ContaEmpresarial extends PessoaJuridica {
     Scanner input = new Scanner(System.in);
     Random randomId = new Random();
@@ -113,12 +114,12 @@ public class ContaEmpresarial extends PessoaJuridica {
 
 
     public double calcularCredito(double creditoValor) {
-        set_saldo(get_saldo() - creditoValor -(creditoValor * 0.0299));
+        set_saldo(get_saldo() - creditoValor - (creditoValor * 0.0299));
         return creditoValor;
     }
 
     public void calcularCreditoVoid(double creditovalor) {
-        set_saldo(get_saldo() - creditovalor - (creditovalor * 0.0299) );
+        set_saldo(get_saldo() - creditovalor - (creditovalor * 0.0299));
         System.out.printf("\nO crédito de R$%.2f foi realizado com sucesso.\n", creditovalor);
         consultarSaldoVoid();
     }
@@ -158,9 +159,10 @@ public class ContaEmpresarial extends PessoaJuridica {
     //------------------------ TERMINAR AS FUNÇÕES --------------------------
 
     public void abrirContaEmpresarial() {
-
+        perguntas();
+        System.out.println("Digite o valor do depósito inicial:");
+        _saldo = input.nextDouble();
     }
-
 
     public double depositar(double depositoValor) {
         set_saldo(depositoValor + get_saldo());
@@ -270,7 +272,7 @@ public class ContaEmpresarial extends PessoaJuridica {
                         consultarSaldoVoid();
                         continuarPrograma();
                     }
-                    case 6 ->{
+                    case 6 -> {
                         sair = true;
                     }
                     default -> {
@@ -308,11 +310,6 @@ public class ContaEmpresarial extends PessoaJuridica {
                 sair = true;
             }
         } while (!sair);
-    }
-
-    public void perguntaSaldoInicial() {
-        System.out.println("Digite o valor do depósito inicial:");
-        _saldo = input.nextDouble();
     }
 
 

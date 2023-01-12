@@ -139,8 +139,12 @@ public class ContaInvestimentoPF extends PessoaFisica {
 //------------------------ TERMINAR AS FUNÇÕES --------------------------
 
     public void abrirContaInvestimentoPF() {
-
+        perguntas();
+        System.out.println("Digite o valor do depósito inicial:");
+        _saldo = input.nextDouble();
     }
+
+
 
     public double depositar(double depositoValor) {
         set_saldo(depositoValor + get_saldo());
@@ -273,9 +277,6 @@ public class ContaInvestimentoPF extends PessoaFisica {
 
     }
 
-    public void perguntaSaldoInicial() {
-        System.out.println("Digite o valor do depósito inicial:");
-        _saldo = input.nextDouble();
-    }
+
 
 }
