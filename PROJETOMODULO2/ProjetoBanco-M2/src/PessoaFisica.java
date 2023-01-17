@@ -103,11 +103,6 @@ public abstract class PessoaFisica {
     }
 
     // ----------------------- METODOS -----------------------------------------
-    public void imprimirDadosPFNaTela() {
-        System.out.println(toString());
-    }
-
-
     public void perguntas() {
         System.out.println("Digite seu Nome:");
         _nome = input.next();

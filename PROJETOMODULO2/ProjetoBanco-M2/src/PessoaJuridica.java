@@ -101,11 +101,6 @@ public abstract class PessoaJuridica {
     }
 
     // ----------------------- METODOS -----------------------------------------
-    public void imprimirDadosPJNaTela() {
-        System.out.println(toString());
-    }
-
-
     public void perguntas() {
         System.out.println("Digite o CNPJ da sua empresa:");
         _cnpj = input.next();
