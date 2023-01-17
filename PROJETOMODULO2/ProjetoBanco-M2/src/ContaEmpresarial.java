@@ -22,6 +22,11 @@ public class ContaEmpresarial extends PessoaJuridica {
     final private String _agencia = "145";
     private double _saldo;
 
+
+    // ----------- PRE ABERTURA DA CONTA INVESTIMENTO ---------------
+    ContaInvestimentoPJ CIPJ = new ContaInvestimentoPJ(get_cnpj(), get_razaoSocial(), get_nomeFantasia(),
+            get_dataDeAbertura(), get_endereco(), get_telefone(), get_contaInvestimento());
+
     private double _contaInvestimento;
 
 
@@ -94,18 +99,40 @@ public class ContaEmpresarial extends PessoaJuridica {
                 "\nagencia: " + get_agencia() +
                 "\noperaçao: " + get_operacao() +
                 "\nnumConta: " + get_numConta() +
-                "\nsaldo: " + get_saldo() +
-                "\ncontaInvestimento: " + get_contaInvestimento() +
+                "\nsaldo: R$" + get_saldo() +
+                "\ncontaInvestimento: R$" + get_contaInvestimento() +
                 "\n}";
     }
+    public String dadosDaConta() {
+        return "\nConta Investimento PJ" +
+                "\nCNPJ: " + get_cnpj() +
+                "\nRazão Social: " + get_razaoSocial() +
+                "\nNome Fantasia: " + get_nomeFantasia() +
+                "\nData De Abertura: " + get_dataDeAbertura() +
+                "\nEndereço: " + get_endereco() +
+                "\nTelefone: " + get_telefone() +
+                "\nAgência: " + get_agencia() +
+                "\nOperaçao: " + get_operacao() +
+                "\nNª da Conta: " + get_numConta() +
+                "\nSaldo: " + get_saldo();
+    }
 
+    public void mostrarDados(){
+        System.out.println(dadosDaConta());
+    }
 
     //------------------------------ METODOS ---------------------------------------
-    // VOID
+    //------------------------ ABRIR CONTA --------------------------
+
+    public void abrirContaEmpresarial() {
+        perguntas();
+        System.out.println("Digite o valor do depósito inicial:");
+        _saldo = input.nextDouble();
+    }
+    //------------------------ CONSULTAR SALDO --------------------------
     public void consultarSaldoVoid() {
-        System.out.printf("%s - O saldo atual da conta Nº %s é: R$%.2f\n" +
-                        "                             - O saldo da sua conta investimento é: R$%.2f\n",
-                getDataAtual(), get_numConta(), get_saldo(), get_contaInvestimento());
+        System.out.printf("%s - O saldo atual da Conta Corrente PJ Nº %s é: R$%.2f\n",
+                getDataAtual(), get_numConta(), get_saldo());
     }
 
     public double consultarSaldo() {
@@ -113,56 +140,77 @@ public class ContaEmpresarial extends PessoaJuridica {
     }
 
 
+    //---------------------- FUNCAO CARTAO DE CREDITO  -------------------------------
     public double calcularCredito(double creditoValor) {
-        set_saldo(get_saldo() - creditoValor - (creditoValor * 0.0299));
+        if (get_saldo() < 0 || creditoValor > get_saldo()) {
+            System.out.println("NÃO AUTORIZADO. Você não tem saldo suficiente para Pagar no Credito");
+        } else {
+            set_saldo(get_saldo() - creditoValor - (creditoValor * 0.0145));
+        }
         return creditoValor;
     }
 
-    public void calcularCreditoVoid(double creditovalor) {
-        set_saldo(get_saldo() - creditovalor - (creditovalor * 0.0299));
-        System.out.printf("\nO crédito de R$%.2f foi realizado com sucesso.\n", creditovalor);
-        consultarSaldoVoid();
+    public void calcularCreditoVoid(double creditoValor) {
+
+        if (get_saldo() < 0 || creditoValor > get_saldo()) {
+            System.out.println("NÃO AUTORIZADO. Você não tem saldo suficiente para Pagar no Credito");
+        } else {
+            set_saldo(get_saldo() - creditoValor - (creditoValor * 0.0145));
+            System.out.printf("\nO pagamento em crédito, no valor de R$%.2f foi realizado com sucesso.\n", creditoValor);
+            consultarSaldoVoid();
+        }
     }
 
 
+    //---------------------- FUNCAO CARTAO DE DEBITO  -------------------------------
+
     public double calcularDebito(double debitoValor) {
-        set_saldo(get_saldo() - debitoValor - (0.005 * debitoValor));
+        if (get_saldo() < 0 || debitoValor > get_saldo()) {
+            System.out.println("NÃO AUTORIZADO. Você não tem saldo suficiente para Pagar no Debito");
+        } else {
+            set_saldo(get_saldo() - debitoValor);
+            System.out.printf("\nO pagamento em débito no valor de R$%.2f foi realizado com sucesso.\n", debitoValor);
+            consultarSaldoVoid();
+        }
         return debitoValor;
     }
 
     public void calcularDebitoVoid(double debitoValor) {
         if (get_saldo() < 0 || debitoValor > get_saldo()) {
-            System.out.println("Você não tem saldo suficiente");
+            System.out.println("NÃO AUTORIZADO. Você não tem saldo suficiente para Pagar no Debito");
         } else {
-            set_saldo(get_saldo() - debitoValor - (0.005 * debitoValor));
-            System.out.printf("\nO débito de R$%.2f foi realizado com sucesso.\n", debitoValor);
+            set_saldo(get_saldo() - debitoValor);
+            System.out.printf("\nO pagamento em débito no valor de R$%.2f foi realizado com sucesso.\n", debitoValor);
             consultarSaldoVoid();
         }
     }
 
 
+    //---------------------- FUNCAO SAQUE  -------------------------------
+
     public double calcularSaque(double saqueValor) {
-        set_saldo(get_saldo() - saqueValor - (0.005 * saqueValor));
+        if (get_saldo() < 0 || saqueValor > get_saldo()) {
+            System.out.println("Você não tem saldo suficiente para Sacar");
+        } else {
+            set_saldo(get_saldo() - saqueValor -(saqueValor * 0.005));
+            System.out.printf("\nO saque no valor de R$%.2f foi realizado com sucesso.\n", saqueValor);
+            consultarSaldoVoid();
+        }
         return saqueValor;
     }
 
     public void calcularSaqueVoid(double saqueValor) {
         if (get_saldo() < 0 || saqueValor > get_saldo()) {
-            System.out.println("Você não tem saldo suficiente");
+            System.out.println("Você não tem saldo suficiente para Sacar");
         } else {
-            set_saldo(get_saldo() - saqueValor - (0.005 * saqueValor));
-            System.out.printf("\nO saque de R$%.2f foi realizado com sucesso.\n", saqueValor);
+            set_saldo(get_saldo() - saqueValor -(saqueValor * 0.005));
+            System.out.printf("\nO saque no valor de R$%.2f foi realizado com sucesso.\n", saqueValor);
             consultarSaldoVoid();
         }
     }
 
-    //------------------------ TERMINAR AS FUNÇÕES --------------------------
 
-    public void abrirContaEmpresarial() {
-        perguntas();
-        System.out.println("Digite o valor do depósito inicial:");
-        _saldo = input.nextDouble();
-    }
+    //---------------------- FUNCAO DEPOSITAR  -------------------------------
 
     public double depositar(double depositoValor) {
         set_saldo(depositoValor + get_saldo());
@@ -176,48 +224,79 @@ public class ContaEmpresarial extends PessoaJuridica {
     }
 
 
+
+    //---------------------- FUNCAO TRANSFERIR  -------------------------------
     public double transferirValor(double transferenciaValor) {
-        set_saldo(get_saldo() - transferenciaValor - (0.005 * transferenciaValor));
+        if (get_saldo() < 0 || transferenciaValor > get_saldo()) {
+            System.out.println("Você não tem saldo suficiente para Transferir");
+        } else {
+            set_saldo(get_saldo() - transferenciaValor - (transferenciaValor * 0.0005));
+            consultarSaldoVoid();
+        }
         return transferenciaValor;
     }
 
     public void transferirValorVoid(double transferenciaValor) {
         if (get_saldo() < 0 || transferenciaValor > get_saldo()) {
-            System.out.println("Você não tem saldo suficiente");
+            System.out.println("Você não tem saldo suficiente para Transferir");
         } else {
-            set_saldo(get_saldo() - transferenciaValor - (0.005 * transferenciaValor));
-            System.out.printf("\nA transferência de R$%.2f foi realizado com sucesso.\n", transferenciaValor);
+            set_saldo(get_saldo() - transferenciaValor - (transferenciaValor * 0.0005));
+            System.out.printf("\nA transferência  de R$%.2f foi realizado com sucesso.\n", transferenciaValor);
             consultarSaldoVoid();
         }
     }
 
+
+    //---------------------- FUNCAO INVESTIR  -------------------------------
     public double investirValor(double investimentoValor) {
-        set_saldo(get_saldo() - investimentoValor);
-        set_contaInvestimento(get_contaInvestimento() + investimentoValor);
+        if (get_saldo() < 0 || investimentoValor > get_saldo()) {
+            System.out.println("Você não tem saldo suficiente para Investir");
+        } else {
+                 set_saldo(get_saldo() - investimentoValor);
+            CIPJ.set_saldo(CIPJ.get_saldo() + investimentoValor+ (investimentoValor * 0.02));
+            System.out.printf("\nO investimento de R$%.2f foi realizado com sucesso.\n" +
+                    "O número da sua Conta Investimento é: %s\n", investimentoValor, CIPJ.get_numConta());
+            CIPJ.consultarSaldoVoid();
+            consultarSaldoVoid();
+        }
         return investimentoValor;
     }
-
     public void investirValorVoid(double investimentoValor) {
-        set_saldo(get_saldo() - investimentoValor);
-        set_contaInvestimento(get_contaInvestimento() + investimentoValor);
-        System.out.printf("\nO investimento de R$%.2f foi realizado com sucesso.\n", investimentoValor);
-        consultarSaldoVoid();
+
+        if (get_saldo() < 0 || investimentoValor > get_saldo()) {
+            System.out.println("Você não tem saldo suficiente para Investir");
+        } else {
+
+            set_saldo(get_saldo() - investimentoValor);
+            CIPJ.set_saldo(CIPJ.get_saldo() + investimentoValor+ (investimentoValor * 0.02));
+            System.out.printf("\nO investimento de R$%.2f foi realizado com sucesso.\n" +
+                    "O número da sua Conta Investimento PJ é: %s\n", investimentoValor, CIPJ.get_numConta());
+            set_contaInvestimento(CIPJ.get_saldo());
+            CIPJ.consultarSaldoVoid();
+            consultarSaldoVoid();
+        }
     }
 
     //-------------------------------- AJUSTAR ERROS ----------------------------------------------------
     public void mostrarOperacoes() {
         //------------------------------- OPERAÇÕES CONTA ----------------------------------
-        System.out.println("------------------------------------------------");
-        System.out.println("|       Qual operação você deseja fazer?       |");
-        System.out.println("------------------------------------------------");
-        System.out.println("|             1 - Saque                        |");
-        System.out.println("|             2 - Deposito                     |");
-        System.out.println("|             3 - Transferência                |");
-        System.out.println("|             4 - Investimento                 |");
-        System.out.println("|             5 - Ver Saldo                    |");
-        System.out.println("|                                              |");
-        System.out.println("|             6 - SAIR                         |");
-        System.out.println("------------------------------------------------");
+        System.out.println("\n------------------------------------------------------");
+        System.out.printf("  Nome: %s          CONTA EMPRESARIAL   \n", get_razaoSocial());
+        System.out.printf("  Saldo: R$%.2f                             \n", get_saldo());
+        System.out.printf("  Agência: %s    Op: %s     Nº da Conta: %s            \n", get_agencia(), get_operacao(), get_numConta());
+
+        System.out.println("-------------------------------------------------------");
+        System.out.println("|          Qual operação você deseja fazer?           |");
+        System.out.println("-------------------------------------------------------");
+        System.out.println("|                1 - Saque                            |");
+        System.out.println("|                2 - Deposito                         |");
+        System.out.println("|                3 - Transferência                    |");
+        System.out.println("|                4 - Investimento                     |");
+        System.out.println("|                5 - Ver Saldo                        |");
+        System.out.println("|                6 - Meus Dados                       |");
+        System.out.println("|                                                     |");
+        System.out.println("|                0 - SAIR                             |");
+        System.out.println("-------------------------------------------------------");
         System.out.println("Selecione uma das opções acima");
         realizarOperacao();
     }
@@ -269,10 +348,19 @@ public class ContaEmpresarial extends PessoaJuridica {
                         continuarPrograma();
                     }
                     case 5 -> {
+                        System.out.println("Você selecionou Consultar Saldo");
                         consultarSaldoVoid();
                         continuarPrograma();
                     }
                     case 6 -> {
+                        System.out.println("Você selecionou Mostrar Meus Dados");
+                        mostrarDados();
+                        continuarPrograma();
+                    }
+
+
+                    case 0 -> {
+                        System.out.println("Você selecionou SAIR");
                         sair = true;
                     }
                     default -> {
